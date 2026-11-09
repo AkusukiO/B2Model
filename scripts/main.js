@@ -1,7 +1,8 @@
-fetch('./webring.json')
+fetch('https://digitaaltuintje.nl/webring.json')
   .then((response) => response.json())
   .then((sites) => {
     const { dataset } = getDOMStringMap('script[data-page]')
+
     // Find the index for the current page
     const currentIndex = findWebringIndex(
       sites,
@@ -16,14 +17,12 @@ fetch('./webring.json')
       )
       .reduce((accumulator, current) => accumulator + current)
 
-    if (document.querySelector('nav.webring') !== null) {
-      document
-        .querySelector('footer')
-        .insertAdjacentHTML(
-          'afterbegin',
-          `<nav class="webring"><h2>Digitaal Tuintje Webring</h2><ul>${output}</ul></nav>`,
-        )
-    }
+    document
+      .querySelector('footer')
+      .insertAdjacentHTML(
+        'afterbegin',
+        `<nav class="webring"><h2>Digitaal Tuintje Webring</h2><ul>${output}</ul></nav>`,
+      )
   })
 
 /**
